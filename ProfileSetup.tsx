@@ -19,11 +19,9 @@ export default function ProfileSetup({ navigation }: any) {
 
     setLoading(true);
     try {
-      // 1. Autenticar al usuario de forma anónima en Firebase
       const userCredential = await signInAnonymously(auth);
       const user = userCredential.user;
 
-      // 2. Guardar los datos del perfil directamente en Firestore
       await addDoc(collection(db, 'users'), {
         uid: user.uid,
         name: name,
@@ -36,7 +34,6 @@ export default function ProfileSetup({ navigation }: any) {
       setLoading(false);
       Alert.alert('¡Éxito!', 'Perfil creado correctamente.');
       
-      // Redirigir a la pantalla de búsqueda de llamadas aleatorias
       if (navigation) {
         navigation.navigate('HomeScreen');
       }
@@ -69,4 +66,3 @@ const styles = StyleSheet.create({
   button: { backgroundColor: '#28a745', padding: 15, borderRadius: 8, alignItems: 'center', marginTop: 10 },
   buttonText: { color: '#fff', fontSize: 16, fontWeight: 'bold' }
 });
-
